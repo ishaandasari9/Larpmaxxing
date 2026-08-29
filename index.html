@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prop Dashboard</title>
+<style>
+  /* ---------- base ---------- */
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  :root{
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+    --focus:#4338ca;
+  }
+  body{
+    font-family:var(--font);
+    background:#f4f4f5;
+    color:#18181b;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  body[data-tab="crypto"]{background:#08090c;color:#e7e7ea;--focus:#2dd4a7}
+  .figure,.ed,.big,td,th,.alloc-pct,.pv .chg{font-variant-numeric:tabular-nums}
+
+  h1,h2{margin:0}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    padding:10px 16px;
+    background:#0b0b0d;color:#e7e7ea;
+    border-bottom:1px solid #1e1e22;
+  }
+  .tabs{display:flex;gap:4px}
+  .tab-btn{
+    background:transparent;border:1px solid transparent;color:#a1a1aa;
+    padding:6px 14px;border-radius:8px;font:inherit;cursor:pointer;letter-spacing:-.01em;
+  }
+  .tab-btn[aria-selected="true"]{background:#1c1c20;color:#fff}
+  .spacer{flex:1}
+  .bar-btn{
+    background:#1c1c20;border:1px solid #2a2a30;color:#e7e7ea;
+    padding:6px 12px;border-radius:8px;font:inherit;cursor:pointer;
+  }
+  .bar-btn:hover{background:#26262c}
+  .bar-btn[aria-pressed="true"]{background:#e7e7ea;color:#0b0b0d;border-color:#e7e7ea}
+  body.present .topbar{display:none}
+
+  /* ---------- editable spans ---------- */
+  .ed{
+    outline:none;border-radius:4px;padding:0 2px;margin:0 -2px;
+    cursor:text;
+  }
+  .ed[contenteditable="true"]{box-shadow:inset 0 -1px 0 rgba(0,0,0,.28)}
+  body[data-tab="crypto"] .ed[contenteditable="true"]{box-shadow:inset 0 -1px 0 rgba(255,255,255,.3)}
+  .ed[contenteditable="true"]:hover{background:rgba(0,0,0,.05)}
+  body[data-tab="crypto"] .ed[contenteditable="true"]:hover{background:rgba(255,255,255,.07)}
+  body.present .ed{box-shadow:none!important;background:none!important;cursor:default;margin:0;padding:0}
+
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+  .ed:focus-visible{background:rgba(99,102,241,.10)}
+  body[data-tab="crypto"] .ed:focus-visible{background:rgba(45,212,167,.14)}
+
+  body.present .edit-only{display:none!important}
+
+  /* ---------- shared bits ---------- */
+  .add-row{
+    margin-top:16px;background:transparent;border:1px dashed #d4d4d8;color:#52525b;
+    padding:9px 14px;border-radius:10px;font:inherit;cursor:pointer;
+  }
+  .add-row:hover{background:#fafafa;border-color:#a1a1aa}
+  body[data-tab="crypto"] .add-row{border-color:#2b2b33;color:#a1a1aa}
+  body[data-tab="crypto"] .add-row:hover{background:#141418;border-color:#3a3a44}
+  .icon-btn{
+    background:transparent;border:none;color:#a1a1aa;font-size:18px;line-height:1;
+    cursor:pointer;border-radius:6px;width:26px;height:26px;flex:none;
+  }
+  .icon-btn:hover{background:rgba(0,0,0,.07);color:#3f3f46}
+  body[data-tab="crypto"] .icon-btn:hover{background:rgba(255,255,255,.09);color:#e7e7ea}
+  .mark{width:22px;height:22px;border-radius:7px;display:inline-block;flex:none}
+
+  /* ---------- BANK ---------- */
+  .bank{max-width:960px;margin:0 auto;padding:34px 20px 90px}
+  .bank .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.02em}
+  .bank .mark{background:linear-gradient(135deg,#4338ca,#6366f1)}
+  .greeting{margin:30px 0 4px}
+  .greeting h1{font-size:30px;letter-spacing:-.02em;font-weight:700}
+  .greeting .sub{margin:6px 0 0;color:#71717a}
+  .card{background:#fff;border:1px solid #ececed;border-radius:16px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .total{
+    background:#fff;border:1px solid #ececed;border-radius:16px;padding:20px 22px;
+    margin:24px 0;display:flex;flex-direction:column;gap:6px
+  }
+  .total .label{color:#71717a;font-size:13px}
+  .big{font-size:34px;font-weight:700;letter-spacing:-.02em}
+  .accounts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .acct-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .acct-name{font-weight:600}
+  .acct-num{color:#a1a1aa;font-size:13px;margin:10px 0 14px;letter-spacing:.08em}
+  .acct-bal{font-size:22px;font-weight:700;letter-spacing:-.01em}
+  .txns{margin-top:38px}
+  .txns-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .txns-h h2{font-size:16px;font-weight:600}
+  .txns-h .add-row{margin-top:0}
+  .txn-list{margin-top:14px;border:1px solid #ececed;border-radius:16px;overflow:hidden;background:#fff}
+  .txn{
+    display:grid;grid-template-columns:104px 1fr 150px 110px 26px;gap:12px;align-items:center;
+    padding:14px 18px;border-top:1px solid #f2f2f3
+  }
+  .txn:first-child{border-top:none}
+  body.present .txn{grid-template-columns:104px 1fr 150px 110px}
+  .txn-date{color:#a1a1aa;font-size:13px}
+  .txn-acct{color:#71717a;font-size:13px}
+  .txn-amt{justify-self:end;text-align:right;font-weight:600}
+  .txn-amt.pos{color:#15803d}
+  .txn-amt.neg{color:#3f3f46}
+
+  /* ---------- CRYPTO ---------- */
+  .crypto{max-width:1060px;margin:0 auto;padding:34px 20px 90px}
+  .crypto .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.02em;color:#f4f4f5}
+  .crypto .mark{background:linear-gradient(135deg,#2dd4a7,#22d3ee)}
+  .pv{display:flex;flex-direction:column;gap:8px;margin:26px 0 10px}
+  .pv .label{color:#8a8a94;font-size:13px}
+  .pv .big{font-size:40px}
+  .pv .chg{font-size:15px;font-weight:600}
+  .chg.up{color:#2dd4a7}
+  .chg.down{color:#f0616d}
+  .chart{
+    margin:10px 0 30px;background:#0d0d10;border:1px solid #1a1a20;border-radius:16px;padding:14px
+  }
+  .chart svg{display:block;width:100%;height:240px}
+  .sec-h{font-size:16px;font-weight:600;margin:26px 0 12px;color:#c9c9d1}
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px}
+  table.holdings{
+    width:100%;min-width:680px;border-collapse:collapse;background:#111114;
+    border:1px solid #1e1e24;border-radius:16px;overflow:hidden
+  }
+  .holdings th{
+    text-align:left;font-size:11px;color:#8a8a94;font-weight:600;padding:12px 14px;
+    border-bottom:1px solid #1e1e24;text-transform:uppercase;letter-spacing:.05em
+  }
+  .holdings td{padding:14px;border-top:1px solid #17171c;font-size:14px;vertical-align:middle}
+  .holdings td.num,.holdings th.num{text-align:right}
+  .sym{font-weight:700}
+  .alloc-cell{display:flex;flex-direction:column;gap:6px;min-width:130px}
+  .alloc{position:relative;height:6px;background:#1f1f26;border-radius:99px;overflow:hidden}
+  .alloc-fill{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#2dd4a7,#22d3ee);border-radius:99px}
+  .alloc-pct{font-size:12px;color:#8a8a94}
+  .cash-row{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:15px 16px;background:#111114;border:1px solid #1e1e24;border-radius:14px;margin-top:14px
+  }
+  .cash-row .label{color:#8a8a94;font-size:14px}
+  .cash-row .ed{font-weight:600}
+  .activity{margin-top:30px}
+  .act-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+  .act-h h2{font-size:16px;font-weight:600;color:#c9c9d1}
+  .act-h .add-row{margin-top:0}
+  .act{
+    display:grid;grid-template-columns:1fr auto 26px;gap:12px;align-items:center;
+    padding:12px 14px;border:1px solid #1e1e24;border-top:none
+  }
+  .act:first-of-type{border-top:1px solid #1e1e24;border-radius:12px 12px 0 0}
+  .act:last-of-type{border-radius:0 0 12px 12px}
+  body.present .act{grid-template-columns:1fr auto}
+  .act-time{color:#8a8a94;font-size:13px}
+
+  /* ---------- motion ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .ed,.bar-btn,.tab-btn,.add-row,.icon-btn{transition:background .12s ease,box-shadow .12s ease,color .12s ease}
+    .alloc-fill{transition:width .25s ease}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:640px){
+    .greeting h1{font-size:24px}
+    .big{font-size:27px}
+    .pv .big{font-size:30px}
+    .accounts{grid-template-columns:1fr}
+    .txn,body.present .txn{display:flex;flex-wrap:wrap;gap:4px 12px}
+    .txn-merch{flex:1 1 100%;order:1;font-weight:500}
+    .txn-date{order:2;color:#a1a1aa}
+    .txn-acct{order:3}
+    .txn-amt{order:4;margin-left:auto}
+    .txn .icon-btn{order:5}
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="tabs" role="tablist" aria-label="Dashboard">
+      <button class="tab-btn" data-tab="bank" role="tab" id="tab-bank">Halcyon</button>
+      <button class="tab-btn" data-tab="crypto" role="tab" id="tab-crypto">Cinder</button>
+    </div>
+    <span class="spacer"></span>
+    <button class="bar-btn" id="presentBtn" aria-pressed="false" title="Present mode — ⌘/Ctrl+E">Present</button>
+    <button class="bar-btn" id="exportBtn">Export</button>
+    <button class="bar-btn" id="importBtn">Import</button>
+    <button class="bar-btn" id="resetBtn">Reset</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </div>
+  <main id="view"></main>
+
+<script>
+"use strict";
+
+/* ============================ defaults ============================ */
+const DEFAULTS = {
+  ui: { tab: "bank", present: false },
+  bank: {
+    brand: "Halcyon",
+    greeting: "Good morning",
+    greetingName: "Jordan",
+    tagline: "Here is where your money stands today.",
+    totalLabel: "Total balance",
+    activityHeading: "Recent activity",
+    accounts: [
+      { name: "Everyday Checking",       number: "•••• 4471", balance: 5218.44 },
+      { name: "Halcyon Savings",         number: "•••• 9006", balance: 24310.00 },
+      { name: "Halcyon Signature Card",  number: "•••• 2288", balance: -1342.87 }
+    ],
+    transactions: [
+      { date: "2026-08-28", merchant: "Rowan & Vine Grocery",  account: "Everyday Checking",      amount: -84.20 },
+      { date: "2026-08-28", merchant: "Metro Transit",          account: "Everyday Checking",      amount: -2.75 },
+      { date: "2026-08-27", merchant: "Employer Payroll",       account: "Everyday Checking",      amount: 3125.00 },
+      { date: "2026-08-26", merchant: "Lumen Coffee House",     account: "Halcyon Signature Card", amount: -5.40 },
+      { date: "2026-08-25", merchant: "Cedar Street Pharmacy",  account: "Halcyon Signature Card", amount: -32.19 },
+      { date: "2026-08-24", merchant: "Aster Home Supply",      account: "Halcyon Signature Card", amount: -128.66 },
+      { date: "2026-08-23", merchant: "Interest Earned",        account: "Halcyon Savings",        amount: 41.88 },
+      { date: "2026-08-22", merchant: "Meridian Utilities",     account: "Everyday Checking",      amount: -146.03 }
+    ]
+  },
+  crypto: {
+    brand: "Cinder",
+    cash: 3200.00,
+    seed: 987654321,
+    pvLabel: "Portfolio value",
+    cashLabel: "Cash balance",
+    holdingsHeading: "Holdings",
+    activityHeading: "Recent activity",
+    holdings: [
+      { symbol: "BTC",  price: 61240.32, change24h: 2.4,  qty: 0.412 },
+      { symbol: "ETH",  price: 3380.11,  change24h: -1.2, qty: 4.75 },
+      { symbol: "SOL",  price: 168.44,   change24h: 5.8,  qty: 62 },
+      { symbol: "LINK", price: 17.92,    change24h: 0.6,  qty: 540 },
+      { symbol: "ARB",  price: 1.14,     change24h: -3.4, qty: 3200 }
+    ],
+    activity: [
+      { text: "Bought 0.05 BTC",  time: "3h ago" },
+      { text: "Sold 120 ARB",     time: "yesterday" },
+      { text: "Received 1.2 ETH", time: "2 days ago" },
+      { text: "Staking reward",   time: "3 days ago" }
+    ]
+  }
+};
+
+/* ============================ state / persistence ============================ */
+const KEY = "prop-dashboard-v1";
+const clone = (o) => JSON.parse(JSON.stringify(o));
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const p = JSON.parse(raw);
+      if(p && p.bank && p.crypto && p.ui) return p;
+    }
+  }catch(e){}
+  return clone(DEFAULTS);
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+}
+
+let state = load();
+const view = document.getElementById("view");
+
+/* ============================ path helpers ============================ */
+function getPath(obj, path){
+  return path.split(".").reduce((a, k) => (a == null ? a : a[k]), obj);
+}
+function setPath(obj, path, val){
+  const ks = path.split(".");
+  const last = ks.pop();
+  let t = obj;
+  for(const k of ks) t = t[k];
+  t[last] = val;
+}
+
+/* ============================ formatting ============================ */
+const moneyF = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+const pctF   = new Intl.NumberFormat("en-US", { style: "percent", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const qtyF   = new Intl.NumberFormat("en-US", { maximumFractionDigits: 8 });
+
+const MINUS = "−"; // typographic minus
+
+function fmtMoney(n){ return moneyF.format(Number(n) || 0); }
+function fmtPct(n){
+  const x = Number(n) || 0;
+  return (x >= 0 ? "+" : MINUS) + pctF.format(Math.abs(x) / 100);
+}
+function fmtPctPlain(n){ return pctF.format((Number(n) || 0) / 100); }
+function fmtQty(n){ return qtyF.format(Number(n) || 0); }
+function fmtTxn(n){
+  const x = Number(n) || 0;
+  if(x === 0) return moneyF.format(0);
+  return (x > 0 ? "+" : MINUS) + moneyF.format(Math.abs(x));
+}
+function parseNum(s){
+  const m = String(s).replace(/[^0-9.eE+-]/g, "");
+  const n = parseFloat(m);
+  return isNaN(n) ? 0 : n;
+}
+function esc(s){
+  return String(s).replace(/[&<>"]/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+}
+function today(){ return new Date().toISOString().slice(0, 10); }
+
+/* ============================ editable span builder ============================ */
+function ed(path, type, val, cls){
+  let disp;
+  if(type === "money")        disp = fmtMoney(val);
+  else if(type === "percent") disp = fmtPct(val);
+  else if(type === "txn")     disp = fmtTxn(val);
+  else if(type === "qty")     disp = fmtQty(val);
+  else                        disp = esc(val);
+  const editable = state.ui.present ? "false" : "true";
+  return '<span class="ed' + (cls ? " " + cls : "") + '" data-path="' + path +
+         '" data-type="' + type + '" contenteditable="' + editable +
+         '" role="textbox" tabindex="0" spellcheck="false">' + disp + "</span>";
+}
+
+/* ============================ seeded chart series ============================ */
+function mulberry32(a){
+  return function(){
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function seededSeries(seed, n, changePct){
+  const rnd = mulberry32((seed >>> 0) || 1);
+  const out = [];
+  let v = 0;
+  for(let i = 0; i < n; i++){
+    v += (rnd() - 0.5) * 1.3;
+    out.push(v);
+  }
+  // Force the net move across the series to match the sign (and rough size)
+  // of the 24h change, so the end of the line trends the same direction.
+  const dir = (Number(changePct) || 0) >= 0 ? 1 : -1;
+  const targetNet = dir * Math.max(Math.abs(Number(changePct) || 0) * 1.2, 3);
+  const rawNet = out[n - 1] - out[0];
+  const adjust = targetNet - rawNet;
+  for(let i = 0; i < n; i++){
+    out[i] += (i / (n - 1)) * adjust;
+  }
+  return out;
+}
+
+/* ============================ render: bank ============================ */
+function renderBank(){
+  const b = state.bank;
+  const total = b.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+
+  return '' +
+  '<div class="bank">' +
+    '<header class="brand"><span class="mark"></span>' + ed("bank.brand", "text", b.brand) + '</header>' +
+
+    '<div class="greeting">' +
+      '<h1>' + ed("bank.greeting", "text", b.greeting) + ', ' + ed("bank.greetingName", "text", b.greetingName) + '</h1>' +
+      '<p class="sub">' + ed("bank.tagline", "text", b.tagline) + '</p>' +
+    '</div>' +
+
+    '<div class="total">' +
+      '<span class="label">' + ed("bank.totalLabel", "text", b.totalLabel) + '</span>' +
+      '<span class="big figure">' + fmtMoney(total) + '</span>' +
+    '</div>' +
+
+    '<div class="accounts">' +
+      b.accounts.map(function(a, i){
+        return '<div class="card acct">' +
+          '<div class="acct-h">' +
+            '<span class="acct-name">' + ed("bank.accounts." + i + ".name", "text", a.name) + '</span>' +
+            '<button class="icon-btn edit-only" data-action="del-acct" data-i="' + i + '" aria-label="Delete account">×</button>' +
+          '</div>' +
+          '<div class="acct-num">' + ed("bank.accounts." + i + ".number", "text", a.number) + '</div>' +
+          '<div class="acct-bal figure">' + ed("bank.accounts." + i + ".balance", "money", a.balance) + '</div>' +
+        '</div>';
+      }).join("") +
+      '<button class="add-row edit-only" data-action="add-acct">+ Add account</button>' +
+    '</div>' +
+
+    '<section class="txns">' +
+      '<div class="txns-h">' +
+        '<h2>' + ed("bank.activityHeading", "text", b.activityHeading) + '</h2>' +
+        '<button class="add-row edit-only" data-action="add-txn">+ Add transaction</button>' +
+      '</div>' +
+      '<div class="txn-list">' +
+        b.transactions.map(function(t, i){
+          const cls = "txn-amt " + (t.amount > 0 ? "pos" : t.amount < 0 ? "neg" : "");
+          return '<div class="txn">' +
+            '<span class="txn-date">' + ed("bank.transactions." + i + ".date", "text", t.date) + '</span>' +
+            '<span class="txn-merch">' + ed("bank.transactions." + i + ".merchant", "text", t.merchant) + '</span>' +
+            '<span class="txn-acct">' + ed("bank.transactions." + i + ".account", "text", t.account) + '</span>' +
+            ed("bank.transactions." + i + ".amount", "txn", t.amount, cls) +
+            '<button class="icon-btn edit-only" data-action="del-txn" data-i="' + i + '" aria-label="Delete transaction">×</button>' +
+          '</div>';
+        }).join("") +
+      '</div>' +
+    '</section>' +
+  '</div>';
+}
+
+/* ============================ render: crypto ============================ */
+function renderCrypto(){
+  const c = state.crypto;
+
+  let invNow = 0, invPrev = 0;
+  c.holdings.forEach(function(h){
+    const p = Number(h.price) || 0, q = Number(h.qty) || 0, ch = Number(h.change24h) || 0;
+    invNow  += q * p;
+    invPrev += q * (p / (1 + ch / 100));
+  });
+  const cash = Number(c.cash) || 0;
+  const totalNow  = invNow + cash;
+  const totalPrev = invPrev + cash;
+  const chgAbs = totalNow - totalPrev;
+  const chgPct = totalPrev ? (chgAbs / totalPrev) * 100 : 0;
+  const up = chgPct >= 0;
+
+  /* --- chart --- */
+  const n = 72, W = 720, H = 240;
+  const s = seededSeries(c.seed, n, chgPct);
+  const min = Math.min.apply(null, s), max = Math.max.apply(null, s);
+  const span = (max - min) || 1;
+  const lo = min - span * 0.12, hi = max + span * 0.12;
+  const px = (i) => ((i / (n - 1)) * W).toFixed(1);
+  const py = (v) => (H - ((v - lo) / (hi - lo)) * H).toFixed(1);
+  let line = "M " + px(0) + " " + py(s[0]);
+  for(let i = 1; i < n; i++) line += " L " + px(i) + " " + py(s[i]);
+  const area = line + " L " + W + " " + H + " L 0 " + H + " Z";
+  const stroke = up ? "#2dd4a7" : "#f0616d";
+
+  const svg =
+    '<svg viewBox="0 0 720 240" preserveAspectRatio="none" role="img" ' +
+      'aria-label="Portfolio value trend over the last 24 hours">' +
+      '<defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="' + stroke + '" stop-opacity="0.28"/>' +
+        '<stop offset="1" stop-color="' + stroke + '" stop-opacity="0"/>' +
+      '</linearGradient></defs>' +
+      '<path d="' + area + '" fill="url(#cg)"/>' +
+      '<path d="' + line + '" fill="none" stroke="' + stroke + '" stroke-width="2.5" ' +
+        'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>' +
+      '<circle cx="' + px(n - 1) + '" cy="' + py(s[n - 1]) + '" r="3.5" fill="' + stroke + '" ' +
+        'vector-effect="non-scaling-stroke"/>' +
+    '</svg>';
+
+  /* --- holdings --- */
+  const rows = c.holdings.map(function(h, i){
+    const p = Number(h.price) || 0, q = Number(h.qty) || 0, ch = Number(h.change24h) || 0;
+    const val = q * p;
+    const alloc = totalNow ? (val / totalNow) * 100 : 0;
+    return '<tr>' +
+      '<td class="sym">' + ed("crypto.holdings." + i + ".symbol", "text", h.symbol) + '</td>' +
+      '<td class="num">' + ed("crypto.holdings." + i + ".price", "money", h.price) + '</td>' +
+      '<td class="num ' + (ch >= 0 ? "chg up" : "chg down") + '">' +
+        ed("crypto.holdings." + i + ".change24h", "percent", h.change24h) + '</td>' +
+      '<td><div class="alloc-cell">' +
+        '<div class="alloc"><div class="alloc-fill" style="width:' + Math.max(0, Math.min(100, alloc)).toFixed(1) + '%"></div></div>' +
+        '<span class="alloc-pct">' + fmtPctPlain(alloc) + '</span>' +
+      '</div></td>' +
+      '<td class="num">' + ed("crypto.holdings." + i + ".qty", "qty", h.qty) + '</td>' +
+      '<td class="num figure">' + fmtMoney(val) + '</td>' +
+      '<td class="edit-only"><button class="icon-btn" data-action="del-hold" data-i="' + i + '" aria-label="Delete holding">×</button></td>' +
+    '</tr>';
+  }).join("");
+
+  return '' +
+  '<div class="crypto">' +
+    '<header class="brand"><span class="mark"></span>' + ed("crypto.brand", "text", c.brand) + '</header>' +
+
+    '<div class="pv">' +
+      '<span class="label">' + ed("crypto.pvLabel", "text", c.pvLabel) + '</span>' +
+      '<span class="big figure">' + fmtMoney(totalNow) + '</span>' +
+      '<span class="chg ' + (up ? "up" : "down") + '">' +
+        (up ? "▲ " : "▼ ") + fmtMoney(Math.abs(chgAbs)) + " (" + fmtPct(chgPct) + ") · 24h" +
+      '</span>' +
+    '</div>' +
+
+    '<div class="chart">' + svg + '</div>' +
+    '<button class="add-row edit-only" data-action="reseed">Regenerate chart</button>' +
+
+    '<div class="sec-h">' + ed("crypto.holdingsHeading", "text", c.holdingsHeading) + '</div>' +
+    '<div class="tbl-wrap"><table class="holdings">' +
+      '<thead><tr>' +
+        '<th>Asset</th><th class="num">Price</th><th class="num">24h</th>' +
+        '<th>Allocation</th><th class="num">Quantity</th><th class="num">Value</th>' +
+        '<th class="edit-only"></th>' +
+      '</tr></thead>' +
+      '<tbody>' + rows + '</tbody>' +
+    '</table></div>' +
+    '<button class="add-row edit-only" data-action="add-hold">+ Add holding</button>' +
+
+    '<div class="cash-row">' +
+      '<span class="label">' + ed("crypto.cashLabel", "text", c.cashLabel) + '</span>' +
+      ed("crypto.cash", "money", c.cash) +
+    '</div>' +
+
+    '<section class="activity">' +
+      '<div class="act-h">' +
+        '<h2>' + ed("crypto.activityHeading", "text", c.activityHeading) + '</h2>' +
+        '<button class="add-row edit-only" data-action="add-act">+ Add</button>' +
+      '</div>' +
+      '<div class="act-list">' +
+        c.activity.map(function(x, i){
+          return '<div class="act">' +
+            '<span>' + ed("crypto.activity." + i + ".text", "text", x.text) + '</span>' +
+            '<span class="act-time">' + ed("crypto.activity." + i + ".time", "text", x.time) + '</span>' +
+            '<button class="icon-btn edit-only" data-action="del-act" data-i="' + i + '" aria-label="Delete activity">×</button>' +
+          '</div>';
+        }).join("") +
+      '</div>' +
+    '</section>' +
+  '</div>';
+}
+
+/* ============================ render ============================ */
+function render(){
+  document.body.dataset.tab = state.ui.tab;
+  document.body.classList.toggle("present", !!state.ui.present);
+
+  document.querySelectorAll(".tab-btn").forEach(function(btn){
+    btn.setAttribute("aria-selected", String(btn.dataset.tab === state.ui.tab));
+  });
+  const pb = document.getElementById("presentBtn");
+  pb.setAttribute("aria-pressed", String(!!state.ui.present));
+
+  view.innerHTML = state.ui.tab === "bank" ? renderBank() : renderCrypto();
+}
+
+/* ============================ editing behaviour ============================ */
+let editOriginal = null;
+let cancelNext = false;
+
+document.addEventListener("focusin", function(e){
+  const el = e.target.closest && e.target.closest(".ed");
+  if(!el || el.getAttribute("contenteditable") === "false") return;
+  const type = el.dataset.type;
+  const val = getPath(state, el.dataset.path);
+  editOriginal = String(val);
+  if(type === "money" || type === "percent" || type === "txn" || type === "qty"){
+    el.textContent = String(val);
+  }
+  requestAnimationFrame(function(){
+    try{
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(r);
+    }catch(err){}
+  });
+});
+
+document.addEventListener("keydown", function(e){
+  const el = e.target.closest && e.target.closest(".ed");
+  if(el && el.getAttribute("contenteditable") !== "false"){
+    if(e.key === "Enter"){ e.preventDefault(); el.blur(); }
+    else if(e.key === "Escape"){ e.preventDefault(); cancelNext = true; el.blur(); }
+    return;
+  }
+  if((e.metaKey || e.ctrlKey) && (e.key === "e" || e.key === "E")){
+    e.preventDefault();
+    togglePresent();
+  }
+});
+
+document.addEventListener("focusout", function(e){
+  const el = e.target.closest && e.target.closest(".ed");
+  if(!el) return;
+
+  if(cancelNext){
+    cancelNext = false;
+    editOriginal = null;
+    render();
+    return;
+  }
+  const type = el.dataset.type;
+  const path = el.dataset.path;
+  let v;
+  if(type === "money" || type === "txn" || type === "percent" || type === "qty"){
+    v = parseNum(el.textContent);
+  }else{
+    v = el.textContent.replace(/\s+/g, " ").trim();
+  }
+  setPath(state, path, v);
+  editOriginal = null;
+  save();
+  render();
+});
+
+// keep pasted content as plain text
+document.addEventListener("paste", function(e){
+  const el = e.target.closest && e.target.closest(".ed");
+  if(!el || el.getAttribute("contenteditable") === "false") return;
+  e.preventDefault();
+  const text = (e.clipboardData || window.clipboardData).getData("text");
+  document.execCommand("insertText", false, text.replace(/[\r\n]+/g, " "));
+});
+
+/* ============================ add / delete rows ============================ */
+document.addEventListener("click", function(e){
+  const btn = e.target.closest("[data-action]");
+  if(!btn) return;
+  const a = btn.dataset.action;
+  const i = Number(btn.dataset.i);
+  const b = state.bank, c = state.crypto;
+
+  if(a === "add-acct")      b.accounts.push({ name: "New account", number: "•••• 0000", balance: 0 });
+  else if(a === "del-acct") b.accounts.splice(i, 1);
+  else if(a === "add-txn")  b.transactions.unshift({ date: today(), merchant: "New merchant", account: (b.accounts[0] && b.accounts[0].name) || "", amount: 0 });
+  else if(a === "del-txn")  b.transactions.splice(i, 1);
+  else if(a === "add-hold") c.holdings.push({ symbol: "NEW", price: 0, change24h: 0, qty: 0 });
+  else if(a === "del-hold") c.holdings.splice(i, 1);
+  else if(a === "add-act")  c.activity.unshift({ text: "New activity", time: "just now" });
+  else if(a === "del-act")  c.activity.splice(i, 1);
+  else if(a === "reseed")   c.seed = (Math.random() * 1e9) | 0;
+  else return;
+
+  save();
+  render();
+});
+
+/* ============================ top bar ============================ */
+function togglePresent(){
+  state.ui.present = !state.ui.present;
+  save();
+  render();
+}
+
+document.querySelectorAll(".tab-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    state.ui.tab = btn.dataset.tab;
+    save();
+    render();
+  });
+});
+document.getElementById("presentBtn").addEventListener("click", togglePresent);
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  if(confirm("Reset everything to the default demo data? This cannot be undone.")){
+    state = clone(DEFAULTS);
+    save();
+    render();
+  }
+});
+
+document.getElementById("exportBtn").addEventListener("click", function(){
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "prop-dashboard.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+});
+
+document.getElementById("importBtn").addEventListener("click", function(){
+  document.getElementById("importFile").click();
+});
+document.getElementById("importFile").addEventListener("change", function(e){
+  const f = e.target.files && e.target.files[0];
+  if(!f){ return; }
+  const rd = new FileReader();
+  rd.onload = function(){
+    try{
+      const p = JSON.parse(rd.result);
+      if(!p || !p.bank || !p.crypto) throw new Error("bad shape");
+      if(!p.ui) p.ui = { tab: "bank", present: false };
+      state = p;
+      save();
+      render();
+    }catch(err){
+      alert("That file could not be read as a dashboard export.");
+    }
+    e.target.value = "";
+  };
+  rd.readAsText(f);
+});
+
+/* ============================ boot ============================ */
+render();
+</script>
+</body>
+</html>
