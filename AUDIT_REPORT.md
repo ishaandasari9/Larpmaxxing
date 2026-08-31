@@ -14,21 +14,71 @@ fabricated account balances and fake trading proof. Its screenshot-oriented
 There was no disclosure, educational context, verification workflow, or
 anti-misuse boundary in the rendered product.
 
-The redesigned Larpmaxxing experience changes the product from a fabrication
-tool into a media-literacy tool. It now:
+The redesigned Larpmaxxing experience changes the product from an unmarked
+fabrication tool into a responsible prop-studio and media-literacy hybrid. It
+now:
 
-1. defines wealth/status LARPing in claim-level language;
-2. explains the major tactic families from the supplied taxonomy;
-3. provides fictional practice cases rather than accusing real people;
-4. teaches an evidence-first verification method;
-5. explicitly distinguishes suspicion from proof; and
-6. makes its privacy and prototype limitations clear.
+1. provides four clearly fictional prop-screen worlds with a permanent
+   on-screen disclosure;
+2. defines wealth/status LARPing in claim-level language;
+3. explains the major tactic families from the supplied taxonomy;
+4. provides fictional practice cases rather than accusing real people;
+5. teaches an evidence-first verification method;
+6. explicitly distinguishes suspicion from proof; and
+7. makes its privacy and prototype limitations clear.
 
 This is a strong conceptual match for the supplied definition, but it is not yet
 a production fact-checking service. It does not retrieve posts, preserve source
 artifacts, check records, explain score weighting, cite external research, or
 support human review. The case score is a teaching device and must not be
-presented as an automated truth score.
+presented as an automated truth score. The prop screens are suitable only for
+consensual entertainment and production—not proof of money, payment, returns,
+or expertise.
+
+## Reference benchmark: larped.app
+
+The second brief names [Larped](https://larped.app/app/) as a product reference.
+Its web application is a simple launcher for editable creator dashboards. The
+public site describes bank, payment, crypto, stock, futures, and storefront
+screens; no-account previews; local-only data; and paid editing unlocks. It also
+states that the product is a creative prop, not a financial institution, and
+that deceptive use is prohibited.
+
+Strengths worth adapting:
+
+- a clear “pick a dashboard” entry point;
+- immediate previews with no account requirement;
+- multiple coherent visual worlds;
+- simple, creator-oriented language;
+- local-only privacy framing; and
+- explicit separation from real financial services.
+
+Weaknesses and risks to avoid:
+
+- product copy emphasizes that edit controls and the watermark disappear after
+  purchase, which increases the chance that outputs can be mistaken for real
+  financial interfaces;
+- hidden editing controls optimize for convincing recordings rather than
+  visible disclosure;
+- the launcher explains what each dashboard looks like, but not how wealth
+  imagery can manufacture trust;
+- a terms-of-service prohibition does not provide in-product friction at the
+  moment of creation; and
+- the public launcher offers little verification education or claim-level
+  context.
+
+Larpmaxxing’s implementation adapts the low-friction gallery and multi-screen
+model while taking a materially safer approach:
+
+| Experience | Larped reference | Larpmaxxing redesign |
+| --- | --- | --- |
+| Entry point | Dashboard gallery | Four-template gallery plus live workspace |
+| Customization | Editing behind unlock | Immediate local customization |
+| Disclosure | Watermark described as removable | Permanent in-preview “Fictional prop · not real money” mark |
+| Privacy | Local/device framing | No connections; local browser state only |
+| Creator support | Filmable dashboards and hidden controls | Production checklist and copyable shot notes |
+| Literacy | Separate educational pages | Detection signals and case lab in the same journey |
+| Review ethics | Terms-based prohibition | In-product warnings, claim-level method, and “Suspicion is not proof” boundary |
 
 ## What “the standard” means here
 
@@ -245,12 +295,13 @@ Production requirements:
 
 The page now follows a coherent learning journey:
 
-1. understand the term;
-2. recognize signal families;
-3. practice on fictional cases;
-4. learn a repeatable verification method;
-5. absorb the ethical boundary; and
-6. use precise language.
+1. create a disclosed fictional screen;
+2. understand the term and its potential misuse;
+3. recognize signal families;
+4. practice on fictional cases;
+5. learn a repeatable verification method;
+6. absorb the ethical boundary; and
+7. use precise language.
 
 The sticky navigation provides direct access to each core task. Mobile
 navigation becomes a full-screen menu, and all in-page destinations remain
@@ -260,6 +311,10 @@ available without JavaScript.
 
 Implemented:
 
+- a four-template prop gallery and live device preview;
+- bounded display-name, value, and scene-mood customization;
+- a permanent disclosure that cannot be disabled in the interface;
+- copyable production notes with the intended-use boundary;
 - selectable demo cases with immediate result updates;
 - URL validation with an honest no-fetch message;
 - locally saved case state;
@@ -283,8 +338,9 @@ The new direction uses:
 - asymmetrical but readable layouts; and
 - a dark, task-focused case-lab section.
 
-The design avoids mimicking a bank or brokerage and gives the product a distinct
-media-literacy identity.
+The outer experience avoids mimicking a bank or brokerage and gives the product
+a distinct editorial identity. The device preview uses invented financial UI
+patterns only inside a visibly bounded, permanently marked prop context.
 
 ### Responsive behavior
 
@@ -448,11 +504,14 @@ measures are:
 ## Final verdict
 
 The baseline product failed the supplied wealth/status LARPing standard and
-created a concrete misuse risk by facilitating fake financial screenshots.
+created a concrete misuse risk by facilitating unmarked financial screenshots.
 
-The redesign strongly fulfills the definition, detection, language, and
-harm-control criteria as an educational prototype. It partially fulfills tactic
-and motive coverage and intentionally stops short of claiming real automated
-analysis. The most important next step is not a more sophisticated detector; it
-is a transparent evidence model with citations, contrary evidence, human review,
-and correction rights.
+The redesign is now a hybrid: it retains the creator value demonstrated by the
+Larped reference, but makes fiction visible at the point of use and pairs
+creation with literacy. It strongly fulfills the definition, detection,
+language, and harm-control criteria as an educational prototype. It partially
+fulfills tactic and motive coverage and intentionally stops short of claiming
+real automated analysis. The most important next steps are to validate the
+permanent disclosure under real recording conditions and build a transparent
+evidence model with citations, contrary evidence, human review, and correction
+rights.

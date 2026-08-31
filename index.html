@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Larpmaxxing is a media-literacy toolkit for spotting staged wealth and status online without jumping to conclusions.">
+  <meta name="description" content="Larpmaxxing is a responsible prop-screen studio and media-literacy toolkit for wealth and status content.">
   <meta name="theme-color" content="#f2efe8">
-  <title>Larpmaxxing — Read the flex. Find the facts.</title>
+  <title>Larpmaxxing — Make the scene. Keep it fiction.</title>
   <style>
     :root {
       --paper: #f2efe8;
@@ -390,6 +390,200 @@
     .definition strong { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; }
     .definition p { max-width: 950px; margin: 0; font-family: var(--serif); font-size: clamp(1.45rem, 3vw, 2.45rem); line-height: 1.16; }
 
+    .studio { padding-block: 128px; }
+    .studio-head {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 70px;
+      align-items: end;
+      margin-bottom: 48px;
+    }
+    .studio-head-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .studio-head-note svg { width: 21px; height: 21px; flex: 0 0 21px; color: var(--green); }
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 11px;
+      margin-bottom: 18px;
+    }
+    .template-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 9px;
+      background: var(--card);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .18s ease, transform .18s ease;
+    }
+    .template-card:hover { transform: translateY(-2px); border-color: #85877f; }
+    .template-card[aria-selected="true"] { border: 2px solid var(--ink); padding: 8px; }
+    .template-preview {
+      min-height: 118px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 9px;
+      padding: 14px;
+      background: #e9e5da;
+    }
+    .template-preview.crypto { background: #111815; color: var(--white); }
+    .template-preview.broker { background: #dce5ef; color: #10243a; }
+    .template-preview.store { background: #5534b5; color: var(--white); }
+    .mini-bar { width: 44%; height: 5px; border-radius: 5px; background: currentColor; opacity: .4; }
+    .mini-number { margin-top: 18px; font-family: var(--serif); font-size: 1.55rem; line-height: 1; }
+    .mini-rows { display: grid; gap: 5px; margin-top: auto; }
+    .mini-row { display: flex; justify-content: space-between; gap: 12px; font-size: .5rem; font-weight: 800; opacity: .65; }
+    .template-meta { display: flex; justify-content: space-between; gap: 10px; padding: 12px 5px 4px; }
+    .template-meta strong { font-size: .82rem; }
+    .template-meta span { color: var(--muted); font-size: .68rem; }
+    .studio-workspace {
+      display: grid;
+      grid-template-columns: 250px minmax(320px, 1fr) 250px;
+      min-height: 620px;
+      overflow: hidden;
+      border: 1px solid var(--ink);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: 9px 10px 0 var(--ink);
+    }
+    .studio-controls, .studio-notes { padding: 27px 23px; }
+    .studio-controls { border-right: 1px solid var(--line); }
+    .studio-notes { border-left: 1px solid var(--line); }
+    .studio-controls h3, .studio-notes h3 { margin: 0 0 6px; font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: -.02em; }
+    .studio-controls > p, .studio-notes > p { margin: 0 0 25px; color: var(--muted); font-size: .76rem; }
+    .field { display: grid; gap: 7px; margin-bottom: 16px; }
+    .field label { font-size: .7rem; font-weight: 850; letter-spacing: .05em; text-transform: uppercase; }
+    .field input, .field select {
+      width: 100%;
+      min-height: 43px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 11px;
+      background: var(--white);
+      color: var(--ink);
+    }
+    .field-help { color: var(--muted); font-size: .66rem; }
+    .prop-lock {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 24px;
+      padding: 11px;
+      border: 1px solid #b5c46b;
+      border-radius: 9px;
+      background: #eef7bd;
+      color: #344018;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+    .prop-lock svg { width: 17px; height: 17px; flex: 0 0 17px; }
+    .device-stage {
+      min-width: 0;
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      background: var(--paper-2);
+    }
+    .device {
+      width: min(330px, 100%);
+      min-height: 540px;
+      overflow: hidden;
+      border: 8px solid #111;
+      border-radius: 42px;
+      background: var(--white);
+      box-shadow: 0 24px 48px rgba(23,25,23,.2);
+    }
+    .device-status {
+      height: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 17px;
+      background: #101713;
+      color: var(--white);
+      font-size: .58rem;
+      font-weight: 800;
+    }
+    .prop-screen {
+      position: relative;
+      min-height: 496px;
+      overflow: hidden;
+      padding: 24px 19px 28px;
+      background: #f7f5ef;
+    }
+    .prop-screen.theme-crypto { background: #101713; color: var(--white); }
+    .prop-screen.theme-broker { background: #eff4f8; color: #10243a; }
+    .prop-screen.theme-store { background: #f5f1ff; color: #211845; }
+    .prop-watermark {
+      position: absolute;
+      z-index: 5;
+      inset: 47% auto auto 50%;
+      width: 145%;
+      padding: 9px;
+      border-block: 2px solid currentColor;
+      color: rgba(133, 56, 39, .58);
+      font-size: .69rem;
+      font-weight: 950;
+      letter-spacing: .18em;
+      text-align: center;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%) rotate(-24deg);
+      pointer-events: none;
+    }
+    .theme-crypto .prop-watermark { color: rgba(216, 237, 114, .55); }
+    .screen-kicker { margin: 0 0 5px; color: #70766e; font-size: .6rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .theme-crypto .screen-kicker { color: #8d9993; }
+    .screen-brand { display: flex; align-items: center; gap: 7px; margin-bottom: 34px; font-size: .74rem; font-weight: 900; }
+    .screen-brand-dot { width: 17px; height: 17px; border-radius: 6px; background: var(--coral); }
+    .screen-title { margin: 0 0 4px; font-size: .72rem; font-weight: 700; opacity: .62; }
+    .screen-balance { margin: 0; font-size: 2.15rem; font-weight: 850; letter-spacing: -.06em; line-height: 1.05; }
+    .screen-change { margin: 7px 0 0; color: var(--green); font-size: .67rem; font-weight: 850; }
+    .theme-crypto .screen-change { color: var(--lime); }
+    .screen-chart { height: 92px; margin: 24px -3px 26px; }
+    .screen-chart svg { width: 100%; height: 100%; }
+    .screen-list-title { margin: 0 0 10px; font-size: .63rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .screen-row {
+      display: grid;
+      grid-template-columns: 31px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 11px 0;
+      border-top: 1px solid rgba(101, 104, 96, .18);
+      font-size: .66rem;
+    }
+    .screen-row-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: rgba(228,92,63,.14); font-weight: 900; }
+    .theme-crypto .screen-row-icon { background: rgba(216,237,114,.12); color: var(--lime); }
+    .screen-row strong { display: block; }
+    .screen-row small { display: block; margin-top: 2px; opacity: .55; }
+    .screen-row-value { text-align: right; font-weight: 850; }
+    .screen-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 24px 0; }
+    .screen-stat { padding: 13px; border: 1px solid rgba(101,104,96,.2); border-radius: 10px; background: rgba(255,255,255,.48); }
+    .screen-stat small { display: block; margin-bottom: 8px; font-size: .55rem; opacity: .62; }
+    .screen-stat strong { font-size: .92rem; }
+    .screen-pill {
+      display: inline-flex;
+      margin-top: 18px;
+      border-radius: 7px;
+      padding: 8px 10px;
+      background: #211845;
+      color: var(--white);
+      font-size: .6rem;
+      font-weight: 850;
+    }
+    .production-list { display: grid; gap: 13px; margin: 25px 0; padding: 0; list-style: none; }
+    .production-list li { display: flex; gap: 9px; color: #51564f; font-size: .75rem; }
+    .production-list b { color: var(--green); }
+    .studio-notes .button { width: 100%; min-height: 43px; padding: 9px 12px; font-size: .76rem; }
+    .studio-privacy { margin: 16px 0 0 !important; padding-top: 15px; border-top: 1px solid var(--line); font-size: .67rem !important; }
+
     .overview { padding-block: 128px; }
     .overview-head {
       display: grid;
@@ -689,7 +883,11 @@
       .nav-links.open a { padding: 18px 0; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 2rem; }
       .hero { grid-template-columns: 1fr; padding-top: 66px; }
       .hero-stage { min-height: 600px; }
-      .definition, .overview-head, .analyzer-head, .workflow-grid, .ethics-grid { grid-template-columns: 1fr; gap: 34px; }
+      .definition, .studio-head, .overview-head, .analyzer-head, .workflow-grid, .ethics-grid { grid-template-columns: 1fr; gap: 34px; }
+      .template-grid { grid-template-columns: 1fr 1fr; }
+      .studio-workspace { grid-template-columns: 210px 1fr; }
+      .studio-notes { grid-column: 1 / -1; border-top: 1px solid var(--line); border-left: 0; }
+      .production-list { grid-template-columns: repeat(3, 1fr); }
       .signal-card:nth-child(n) { grid-column: span 6; }
       .analyzer { grid-template-columns: 1fr; }
       .case-picker { border-right: 0; border-bottom: 1px solid #435049; }
@@ -715,7 +913,14 @@
       .score-stamp { width: 82px; height: 82px; bottom: 45px; font-size: 1.7rem; }
       .score-stamp small { display: none; }
       .definition { grid-template-columns: 1fr; gap: 12px; }
-      .overview, .workflow, .glossary { padding-block: 88px; }
+      .studio, .overview, .workflow, .glossary { padding-block: 88px; }
+      .template-grid { grid-template-columns: 1fr; }
+      .template-preview { min-height: 105px; }
+      .studio-workspace { grid-template-columns: 1fr; box-shadow: 5px 6px 0 var(--ink); }
+      .studio-controls { border-right: 0; border-bottom: 1px solid var(--line); }
+      .device-stage { padding: 27px 16px; }
+      .studio-notes { grid-column: auto; }
+      .production-list { grid-template-columns: 1fr; }
       .analyzer-section { padding-block: 86px; }
       .signal-card:nth-child(n) { grid-column: 1 / -1; min-height: 270px; }
       .signal-icon { margin-bottom: 36px; }
@@ -757,12 +962,12 @@
         <span>Larpmaxxing</span>
       </a>
       <div class="nav-links" id="navLinks">
+        <a href="#studio">Prop studio</a>
         <a href="#signals">Spot the signals</a>
         <a href="#analyzer">Case lab</a>
         <a href="#playbook">Verification playbook</a>
-        <a href="#glossary">Glossary</a>
       </div>
-      <a class="button nav-cta" href="#analyzer">Analyze a post</a>
+      <a class="button nav-cta" href="#studio">Open studio</a>
       <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16"/>
@@ -774,21 +979,21 @@
   <main id="main">
     <section class="hero shell" id="top">
       <div>
-        <p class="eyebrow">A media-literacy toolkit</p>
-        <h1 class="display">Read the <em>flex.</em><br>Find the facts.</h1>
-        <p class="hero-copy">Wealth LARPing is the performance of money, access, or status online. Larpmaxxing helps you slow down, inspect the signals, and separate a polished post from a proven claim.</p>
+        <p class="eyebrow">Responsible props + media literacy</p>
+        <h1 class="display">Make the <em>scene.</em><br>Keep it fiction.</h1>
+        <p class="hero-copy">Build clearly fictional money screens for skits, rehearsals, and moodboards—then learn how similar visuals can be misused to manufacture wealth and status online.</p>
         <div class="hero-actions">
-          <a class="button" href="#analyzer">
-            Try the case lab
+          <a class="button" href="#studio">
+            Open the prop studio
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
           </a>
-          <a class="button secondary" href="#signals">Learn the signals</a>
+          <a class="button secondary" href="#signals">Learn how to spot misuse</a>
         </div>
         <div class="hero-proof">
           <span class="proof-faces" aria-hidden="true">
             <span class="proof-face">CC</span><span class="proof-face">ML</span><span class="proof-face">OS</span>
           </span>
-          Built for curious scrollers, researchers, and moderators
+          Built for creators, curious scrollers, researchers, and moderators
         </div>
       </div>
 
@@ -817,6 +1022,97 @@
       <div class="definition shell">
         <strong id="definition-heading">Working definition</strong>
         <p>Wealth and status LARPing is the deliberate construction of an online persona that implies financial success, ownership, expertise, or elite access that the available evidence does not support.</p>
+      </div>
+    </section>
+
+    <section class="studio shell" id="studio" aria-labelledby="studio-title">
+      <div class="studio-head">
+        <div>
+          <p class="eyebrow">The prop studio</p>
+          <h2 class="display section-title" id="studio-title">Four story worlds.<br>One honest boundary.</h2>
+        </div>
+        <div class="studio-head-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-5"/></svg>
+          <span>Every screen is fictional, stays on your device, and carries a permanent prop mark. The studio never connects to a bank, broker, exchange, or storefront.</span>
+        </div>
+      </div>
+
+      <div class="template-grid" role="tablist" aria-label="Prop screen templates">
+        <button class="template-card" type="button" role="tab" aria-selected="true" aria-controls="propScreen" data-template="bank">
+          <span class="template-preview">
+            <span class="mini-bar"></span><span class="mini-number">$28,450</span>
+            <span class="mini-rows"><span class="mini-row"><span>CHECKING</span><span>$8,120</span></span><span class="mini-row"><span>SAVINGS</span><span>$20,330</span></span></span>
+          </span>
+          <span class="template-meta"><strong>Halcyon Bank</strong><span>Clean</span></span>
+        </button>
+        <button class="template-card" type="button" role="tab" aria-selected="false" aria-controls="propScreen" data-template="crypto">
+          <span class="template-preview crypto">
+            <span class="mini-bar"></span><span class="mini-number">$84,204</span>
+            <span class="mini-rows"><span class="mini-row"><span>BTC</span><span>+2.4%</span></span><span class="mini-row"><span>ETH</span><span>−1.2%</span></span></span>
+          </span>
+          <span class="template-meta"><strong>Cinder Wallet</strong><span>Dark</span></span>
+        </button>
+        <button class="template-card" type="button" role="tab" aria-selected="false" aria-controls="propScreen" data-template="broker">
+          <span class="template-preview broker">
+            <span class="mini-bar"></span><span class="mini-number">+$12,840</span>
+            <span class="mini-rows"><span class="mini-row"><span>OPEN P/L</span><span>+18.2%</span></span><span class="mini-row"><span>POSITIONS</span><span>4</span></span></span>
+          </span>
+          <span class="template-meta"><strong>Ridgeline Trade</strong><span>Data</span></span>
+        </button>
+        <button class="template-card" type="button" role="tab" aria-selected="false" aria-controls="propScreen" data-template="store">
+          <span class="template-preview store">
+            <span class="mini-bar"></span><span class="mini-number">$9,605</span>
+            <span class="mini-rows"><span class="mini-row"><span>TODAY</span><span>42 orders</span></span><span class="mini-row"><span>CONVERSION</span><span>3.8%</span></span></span>
+          </span>
+          <span class="template-meta"><strong>Vaultly Store</strong><span>Bright</span></span>
+        </button>
+      </div>
+
+      <div class="studio-workspace">
+        <form class="studio-controls" id="studioControls">
+          <h3>Customize the scene</h3>
+          <p>Values update in the fictional device preview.</p>
+          <div class="field">
+            <label for="sceneName">Display name</label>
+            <input id="sceneName" name="sceneName" type="text" value="Jordan" maxlength="28" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sceneValue">Hero value</label>
+            <input id="sceneValue" name="sceneValue" type="number" value="28450" min="0" max="9999999" step="50" inputmode="decimal">
+            <span class="field-help">Fictional USD · maximum $9,999,999</span>
+          </div>
+          <div class="field">
+            <label for="sceneMood">Scene mood</label>
+            <select id="sceneMood" name="sceneMood">
+              <option value="grounded">Grounded</option>
+              <option value="launch">Launch day</option>
+              <option value="comeback">The comeback</option>
+            </select>
+          </div>
+          <div class="prop-lock">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            Fictional prop mark always on
+          </div>
+        </form>
+
+        <div class="device-stage">
+          <div class="device" aria-label="Fictional prop screen preview">
+            <div class="device-status"><span>9:41</span><span>PROP PREVIEW</span></div>
+            <div class="prop-screen" id="propScreen" role="tabpanel" tabindex="0"></div>
+          </div>
+        </div>
+
+        <aside class="studio-notes">
+          <h3>Ready for the shot</h3>
+          <p>Your setup is private and production-safe by design.</p>
+          <ul class="production-list">
+            <li><b aria-hidden="true">✓</b><span>Invented product and brand names</span></li>
+            <li><b aria-hidden="true">✓</b><span>No real financial connections</span></li>
+            <li><b aria-hidden="true">✓</b><span>Persistent on-screen disclosure</span></li>
+          </ul>
+          <button class="button" type="button" id="copyShotNotes">Copy shot notes</button>
+          <p class="studio-privacy">Use for consensual entertainment and production. Never use a prop screen as proof of funds, payment, returns, or financial expertise.</p>
+        </aside>
       </div>
     </section>
 
@@ -1027,6 +1323,93 @@
   <script>
     "use strict";
 
+    const propTemplates = {
+      bank: {
+        brand: "Halcyon",
+        kicker: "Total fictional balance",
+        theme: "",
+        rows: [["EC", "Everyday checking", "•••• 4471", .29], ["SV", "Halcyon savings", "•••• 9006", .71]]
+      },
+      crypto: {
+        brand: "Cinder",
+        kicker: "Simulated portfolio",
+        theme: "theme-crypto",
+        rows: [["B", "Bitcoin", "BTC", .52], ["E", "Ethereum", "ETH", .31], ["S", "Solana", "SOL", .17]]
+      },
+      broker: {
+        brand: "Ridgeline",
+        kicker: "Simulated open profit",
+        theme: "theme-broker",
+        rows: [["NV", "Northvale Tech", "Long · Demo", .46], ["AR", "Arc Ridge 100", "Long · Demo", .34], ["GL", "Gold future", "Demo contract", .20]]
+      },
+      store: {
+        brand: "Vaultly",
+        kicker: "Fictional gross sales",
+        theme: "theme-store",
+        rows: [["OR", "Orders", "Today", 42], ["CV", "Conversion", "Demo traffic", 3.8], ["AV", "Avg. order", "Fictional", 86]]
+      }
+    };
+
+    const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    let currentTemplate = "bank";
+
+    function safeText(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[character]);
+    }
+
+    function renderPropScreen() {
+      const data = propTemplates[currentTemplate];
+      const name = document.getElementById("sceneName").value.trim() || "Creator";
+      const rawValue = Number(document.getElementById("sceneValue").value);
+      const value = Math.max(0, Math.min(9999999, Number.isFinite(rawValue) ? rawValue : 0));
+      const mood = document.getElementById("sceneMood").value;
+      const screen = document.getElementById("propScreen");
+      const moodLabels = { grounded: "Today", launch: "Launch day", comeback: "Comeback week" };
+      const chart = `
+        <div class="screen-chart" aria-hidden="true">
+          <svg viewBox="0 0 270 92" preserveAspectRatio="none">
+            <path d="M0 76 C24 72 33 61 54 65 S87 45 108 53 S144 25 166 38 S203 17 225 25 S250 8 270 12" fill="none" stroke="currentColor" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+            <path d="M0 76 C24 72 33 61 54 65 S87 45 108 53 S144 25 166 38 S203 17 225 25 S250 8 270 12 L270 92 L0 92 Z" fill="currentColor" opacity=".06"/>
+          </svg>
+        </div>`;
+
+      let rows = "";
+      if (currentTemplate === "store") {
+        const storeValues = [Math.max(1, Math.round(value / 230)), "3.8%", money.format(Math.max(35, value / 110))];
+        rows = data.rows.map((row, index) => `
+          <div class="screen-row">
+            <span class="screen-row-icon">${row[0]}</span>
+            <span><strong>${row[1]}</strong><small>${row[2]}</small></span>
+            <span class="screen-row-value">${storeValues[index]}</span>
+          </div>`).join("");
+      } else {
+        rows = data.rows.map((row) => `
+          <div class="screen-row">
+            <span class="screen-row-icon">${row[0]}</span>
+            <span><strong>${row[1]}</strong><small>${row[2]}</small></span>
+            <span class="screen-row-value">${money.format(value * row[3])}</span>
+          </div>`).join("");
+      }
+
+      const supportingContent = currentTemplate === "store"
+        ? `<div class="screen-stat-grid"><div class="screen-stat"><small>SESSIONS</small><strong>${Math.round(value / 7.6).toLocaleString()}</strong></div><div class="screen-stat"><small>REFUNDS</small><strong>${money.format(value * .018)}</strong></div></div><span class="screen-pill">View fictional report</span>`
+        : chart;
+
+      screen.className = `prop-screen ${data.theme}`;
+      screen.innerHTML = `
+        <span class="prop-watermark">Fictional prop · not real money</span>
+        <div class="screen-brand"><span class="screen-brand-dot"></span>${data.brand} <span style="margin-left:auto;opacity:.52">${safeText(moodLabels[mood])}</span></div>
+        <p class="screen-kicker">Hello, ${safeText(name)}</p>
+        <p class="screen-title">${data.kicker}</p>
+        <p class="screen-balance">${currentTemplate === "broker" ? "+" : ""}${money.format(value)}</p>
+        <p class="screen-change">${currentTemplate === "store" ? "42 fictional orders today" : "+4.8% simulated change"}</p>
+        ${supportingContent}
+        <p class="screen-list-title">${currentTemplate === "store" ? "Store snapshot" : currentTemplate === "bank" ? "Accounts" : "Positions"}</p>
+        ${rows}`;
+    }
+
     const cases = {
       jet: {
         title: "Likely staged access presented as ownership",
@@ -1130,7 +1513,63 @@
       if (event.target.closest("a")) closeMenu();
     });
 
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navLinks.classList.contains("open")) {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+
     window.addEventListener("scroll", () => header.classList.toggle("scrolled", window.scrollY > 8), { passive: true });
+
+    function selectTemplate(template) {
+      currentTemplate = template;
+      document.querySelectorAll(".template-card").forEach((button) => {
+        const selected = button.dataset.template === template;
+        button.setAttribute("aria-selected", String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      renderPropScreen();
+    }
+
+    document.querySelector(".template-grid").addEventListener("click", (event) => {
+      const button = event.target.closest(".template-card");
+      if (button) selectTemplate(button.dataset.template);
+    });
+
+    document.querySelector(".template-grid").addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const buttons = [...document.querySelectorAll(".template-card")];
+      const activeIndex = buttons.findIndex((button) => button.getAttribute("aria-selected") === "true");
+      let nextIndex = activeIndex;
+      if (event.key === "ArrowRight") nextIndex = (activeIndex + 1) % buttons.length;
+      if (event.key === "ArrowLeft") nextIndex = (activeIndex - 1 + buttons.length) % buttons.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = buttons.length - 1;
+      selectTemplate(buttons[nextIndex].dataset.template);
+      buttons[nextIndex].focus();
+    });
+
+    document.getElementById("studioControls").addEventListener("input", renderPropScreen);
+    document.getElementById("studioControls").addEventListener("submit", (event) => event.preventDefault());
+
+    document.getElementById("copyShotNotes").addEventListener("click", async () => {
+      const templateName = propTemplates[currentTemplate].brand;
+      const notes = [
+        `Larpmaxxing shot notes — ${templateName}`,
+        "Purpose: fictional entertainment prop",
+        "On-screen disclosure: Fictional prop · not real money",
+        "No real bank, broker, exchange, or storefront connection",
+        "Do not use as proof of payment, funds, returns, or expertise"
+      ].join("\n");
+      try {
+        await navigator.clipboard.writeText(notes);
+        showToast("Production notes copied.");
+      } catch (error) {
+        showToast("Clipboard access is unavailable in this browser.");
+      }
+    });
 
     function renderCase(key) {
       const data = cases[key];
@@ -1233,6 +1672,7 @@
       buttons[nextIndex].focus();
     });
 
+    selectTemplate("bank");
     renderCase("jet");
     renderStep(0);
   </script>

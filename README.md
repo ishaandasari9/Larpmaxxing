@@ -1,10 +1,13 @@
 # Larpmaxxing
 
-A dependency-free, single-page media-literacy experience for understanding and
-investigating wealth and status LARPing on social media.
+A dependency-free, single-page responsible prop studio and media-literacy
+experience for wealth and status content.
 
 ## What it includes
 
+- Four customizable, clearly marked fictional screens: bank, crypto, brokerage,
+  and storefront.
+- A permanent on-screen prop disclosure and production-safety checklist.
 - A clear working definition focused on unsupported claims of ownership,
   expertise, financial success, and elite access.
 - Four evidence-signal families: access, money, urgency, and consistency.
@@ -26,9 +29,10 @@ Then open `http://localhost:4173`.
 
 ## Privacy and scope
 
-The case lab is an educational prototype. It does not fetch pasted URLs, scrape
-social platforms, identify people, or issue factual verdicts. Saved demo cases
-remain in browser `localStorage`.
+The prop studio never connects to a bank, broker, exchange, or storefront, and
+must not be used as evidence of payment, funds, returns, or expertise. The case
+lab does not fetch pasted URLs, scrape social platforms, identify people, or
+issue factual verdicts. Saved demo cases remain in browser `localStorage`.
 
 See [`AUDIT_REPORT.md`](./AUDIT_REPORT.md) for the product, content, UX,
 accessibility, trust, and implementation assessment.
