@@ -1,517 +1,379 @@
-# Larpmaxxing product and standards audit
+# Larpmaxxing product and UX report
 
 Audit date: 31 August 2026
-Scope: product purpose, wealth/status LARPing taxonomy, information quality,
-user experience, accessibility, privacy, safety, and technical implementation.
 
-## Executive assessment
+## Executive summary
 
-The original application did not explain wealth or status LARPing. It was an
-editable mock bank-and-crypto dashboard designed to create convincing financial
-screenshots. That directly enabled two tactics named in the supplied standard:
-fabricated account balances and fake trading proof. Its screenshot-oriented
-"Present mode" removed editing controls and made the output look authentic.
-There was no disclosure, educational context, verification workflow, or
-anti-misuse boundary in the rendered product.
+Larpmaxxing is a creative money-screen simulator for skits, shorts, roleplay,
+moodboards, and rehearsals. Its mission is entertainment, not financial
+verification or social-media policing.
 
-The redesigned Larpmaxxing experience changes the product from an unmarked
-fabrication tool into a responsible prop-studio and media-literacy hybrid. It
-now:
+The original prototype proved the core interaction: editable bank and crypto
+screens that worked without accounts or dependencies. Its limitations were
+product breadth, creator workflow, mobile ergonomics, and the absence of a
+visible in-product statement that the screens were fictional.
 
-1. provides four clearly fictional prop-screen worlds with a permanent
-   on-screen disclosure;
-2. defines wealth/status LARPing in claim-level language;
-3. explains the major tactic families from the supplied taxonomy;
-4. provides fictional practice cases rather than accusing real people;
-5. teaches an evidence-first verification method;
-6. explicitly distinguishes suspicion from proof; and
-7. makes its privacy and prototype limitations clear.
+The revised product now makes the creator mission explicit and adds:
 
-This is a strong conceptual match for the supplied definition, but it is not yet
-a production fact-checking service. It does not retrieve posts, preserve source
-artifacts, check records, explain score weighting, cite external research, or
-support human review. The case score is a teaching device and must not be
-presented as an automated truth score. The prop screens are suitable only for
-consensual entertainment and production—not proof of money, payment, returns,
-or expertise.
+- six fictional screen worlds: bank, crypto, brokerage, storefront, payment,
+  and livestream;
+- a visual dashboard picker with instant previews;
+- live name, value, and scene-mood controls;
+- local setup saving and reset;
+- a full-screen focus mode for filming;
+- four fire-on-cue fictional alerts;
+- optional live number drift;
+- production notes and a clear local-only privacy model;
+- creator-focused onboarding, feature explanations, and FAQ; and
+- a persistent “Fictional prop · not real money” label.
+
+The result is substantially closer to the low-friction creator mission of
+[Larped](https://larped.app/app/) while retaining an original editorial visual
+identity and stronger disclosure at the moment of use.
+
+## Product-direction decision
+
+The earlier report treated Larpmaxxing partly as a media-literacy or detection
+tool. The product clarification supersedes that direction. The primary user is
+a creator who needs a fictional screen quickly, not an investigator evaluating
+someone else’s post.
+
+This changes the product priorities:
+
+| Previous emphasis | Current emphasis |
+| --- | --- |
+| Analyze external posts | Create fictional scenes |
+| Evidence-risk scoring | Live production cues |
+| Verification playbook | Four-step creator workflow |
+| Detection glossary | Product and privacy FAQ |
+| Case saving | Local scene saving |
+| Researcher/moderator audience | Creator/filmmaker audience |
+
+Safety remains part of product quality, but it is framed as a simple creator
+boundary instead of the main experience.
 
 ## Reference benchmark: larped.app
 
-The second brief names [Larped](https://larped.app/app/) as a product reference.
-Its web application is a simple launcher for editable creator dashboards. The
-public site describes bank, payment, crypto, stock, futures, and storefront
-screens; no-account previews; local-only data; and paid editing unlocks. It also
-states that the product is a creative prop, not a financial institution, and
-that deceptive use is prohibited.
+The supplied reference succeeds because it is easy to understand:
 
-Strengths worth adapting:
+1. choose a dashboard;
+2. edit the screen;
+3. film the scene.
 
-- a clear “pick a dashboard” entry point;
-- immediate previews with no account requirement;
-- multiple coherent visual worlds;
-- simple, creator-oriented language;
-- local-only privacy framing; and
-- explicit separation from real financial services.
+The public site also communicates that the product is fictional, local, and not
+connected to financial institutions.
 
-Weaknesses and risks to avoid:
+Larpmaxxing adapts the useful interaction pattern without copying brand names,
+layouts, or copy.
 
-- product copy emphasizes that edit controls and the watermark disappear after
-  purchase, which increases the chance that outputs can be mistaken for real
-  financial interfaces;
-- hidden editing controls optimize for convincing recordings rather than
-  visible disclosure;
-- the launcher explains what each dashboard looks like, but not how wealth
-  imagery can manufacture trust;
-- a terms-of-service prohibition does not provide in-product friction at the
-  moment of creation; and
-- the public launcher offers little verification education or claim-level
-  context.
-
-Larpmaxxing’s implementation adapts the low-friction gallery and multi-screen
-model while taking a materially safer approach:
-
-| Experience | Larped reference | Larpmaxxing redesign |
+| Area | Reference strength | Larpmaxxing improvement |
 | --- | --- | --- |
-| Entry point | Dashboard gallery | Four-template gallery plus live workspace |
-| Customization | Editing behind unlock | Immediate local customization |
-| Disclosure | Watermark described as removable | Permanent in-preview “Fictional prop · not real money” mark |
-| Privacy | Local/device framing | No connections; local browser state only |
-| Creator support | Filmable dashboards and hidden controls | Production checklist and copyable shot notes |
-| Literacy | Separate educational pages | Detection signals and case lab in the same journey |
-| Review ethics | Terms-based prohibition | In-product warnings, claim-level method, and “Suspicion is not proof” boundary |
+| Entry point | Simple dashboard launcher | Six visual templates plus a live workspace |
+| Account friction | Free previews without an account | Entire prototype works without an account |
+| Variety | Multiple financial and creator surfaces | Bank, crypto, brokerage, store, pay, and live worlds |
+| Filming | Clean recording-oriented screens | Focus mode plus keyboard Escape exit |
+| Movement | Live-looking values and alerts | User-controlled number drift and cue deck |
+| Privacy | Device-local framing | No requests, integrations, trackers, or financial connections |
+| Continuity | Editable scenes | Local setup saving across sessions |
+| Disclosure | Public disclaimers | Persistent disclosure inside every generated scene |
 
-## What “the standard” means here
+## How the app relates to the supplied wealth-LARPing definition
 
-The material supplied in the brief is an informal taxonomy, not a published
-technical, legal, or accessibility standard. It defines wealth/status LARPing as
-constructing a deceptive online identity around unsupported claims of money,
-ownership, success, expertise, or elite access.
+The supplied definition concerns pretending to have wealth, access, or expertise
+that a person does not have. A fictional prop simulator can resemble one tactic
+in that taxonomy, but resemblance does not determine intent or use. Film props,
+games, parody, rehearsals, and consensual pranks are legitimate creative uses.
 
-For this audit, that material is converted into six testable product criteria:
+The website now makes the distinction explicit:
 
-| Criterion | Expected product behavior |
+- the product is called a fictional simulator;
+- all companies and activity are invented;
+- the application never connects to real money;
+- a prop label remains visible in all six templates and focus mode;
+- production notes state the intended use; and
+- copy says the screens are not evidence of funds, payment, returns, identity,
+  or expertise.
+
+The standard is therefore fulfilled as an intended-use and disclosure boundary,
+not as a requirement to turn the product into a detector.
+
+## Current experience audit
+
+### 1. Hero and navigation
+
+The hero now leads with “Your story. Your numbers.” and immediately explains the
+creative use cases. The primary action opens the studio; the secondary action
+jumps to the six-screen picker.
+
+Navigation follows creator tasks:
+
+- Dashboards;
+- Live cues;
+- Features; and
+- How it works.
+
+The sticky header, skip link, mobile menu, and in-page anchors reduce navigation
+friction. Escape closes the mobile menu and restores focus.
+
+### 2. Dashboard picker
+
+Six compact visual previews communicate variety before the user commits:
+
+| Screen | Intended scene |
 | --- | --- |
-| Definition | Explain the difference between ordinary role-play, aesthetic performance, and a deceptive factual claim. |
-| Tactics | Cover rented assets, staged sets, fake/cropped financial proof, luxury props, “old money” aesthetics, and guru funnels. |
-| Motives | Explain monetization, social validation, and access/networking incentives without treating motive as proof. |
-| Detection | Teach users to identify inconsistencies, preserve context, and seek independent corroboration. |
-| Language | Define LARPer, to LARP, LARPy, and adjacent concepts while discouraging unsupported labels. |
-| Harm control | Prevent the tool from becoming a harassment, doxxing, fraud, or accusation engine. |
+| Halcyon Bank | Everyday balance or savings story |
+| Cinder Wallet | Crypto or market scene |
+| Ridgeline Trade | Position or trading scene |
+| Vaultly Store | Launch-day or creator-business scene |
+| Northstar Pay | Social payment or group-chat scene |
+| Luma Live | Livestream and audience scene |
 
-WCAG 2.2 AA principles are used separately as the accessibility benchmark,
-although this audit is an engineering review rather than a formal conformance
-certification.
+The picker follows the ARIA tabs keyboard pattern:
 
-## Baseline findings
+- Left/Right moves between templates;
+- Home/End jumps to the first or last template; and
+- only the selected template remains in the tab order.
 
-### Original purpose and content
+### 3. Scene customization
 
-The baseline product was titled “Prop Dashboard” and contained two editable
-financial products:
+The creator can set:
 
-- Halcyon, a mock consumer bank dashboard with editable balances and
-  transactions;
-- Cinder, a mock crypto portfolio with editable holdings, prices, gains, and
-  transaction activity;
-- local persistence plus JSON import/export;
-- a chart generator; and
-- a Present mode that hid all editing chrome for screenshots.
+- a fictional display name;
+- a bounded hero value from 0 to 9,999,999; and
+- one of three scene moods.
 
-### Alignment with the supplied standard
+Input is escaped before rendering. Numbers are formatted by screen type:
+currency for financial screens and viewer count for the livestream.
 
-The baseline accidentally demonstrated what fabricated financial interfaces can
-look like, but did not label that behavior as deception or educate the user.
-This is not meaningful fulfillment of the taxonomy.
+The workspace provides clear controls rather than relying on hidden
+`contenteditable` regions. This improves discoverability, validation, keyboard
+use, and mobile input behavior.
 
-| Area | Baseline result | Reason |
-| --- | --- | --- |
-| Definition | Fail | No mention of LARPing, unsupported identity claims, or the ownership/access distinction. |
-| Tactics | Harmful overlap | Editable balances, gains, and activity could generate the fake screenshots described by the taxonomy. |
-| Motives | Fail | No explanation of courses, signals, affiliate funnels, validation, or networking incentives. |
-| Detection | Fail | No checklist, provenance, context capture, or corroboration workflow. |
-| Language | Fail | No glossary or adjacent-concept distinction. |
-| Harm control | Fail | No disclosure watermark, ethical boundary, or friction against deceptive export. |
+### 4. Save and reset
 
-### Baseline UX and accessibility
+“Save setup” stores only four non-sensitive values in `localStorage`:
 
-Strengths:
+- selected template;
+- display name;
+- hero value; and
+- mood.
 
-- concise visual design;
-- mobile rearrangement for account and transaction data;
-- keyboard focus styling;
-- keyboard support for committing and cancelling inline edits;
-- numeric formatting and stable derived calculations; and
-- no dependency or build-chain risk.
+“Reset” stops live drift, restores defaults, and selects the first template.
+Both actions return visible status feedback.
 
-Material problems:
+### 5. Focus mode
 
-- editable text was implemented with `contenteditable` spans rather than
-  properly labelled form controls;
-- tabs had `role="tab"` but omitted full tab relationships and keyboard arrow
-  behavior;
-- no page description, skip link, landmarks for tool controls, status
-  announcements, or error association;
-- important table content required horizontal scrolling on mobile;
-- destructive actions depended on ambiguous × icons;
-- imported JSON received only shallow shape validation;
-- errors were swallowed in persistence code;
-- the generated chart was ornamental but announced as if it represented real
-  market history; and
-- Present mode deliberately removed the strongest indication that values were
-  editable.
+Focus mode:
 
-## Redesigned product assessment
+- centers the fictional device;
+- removes the setup chrome from the shot;
+- keeps the prop label inside the device;
+- provides a visible Exit control; and
+- exits with Escape.
 
-### 1. Definition: strong
+This resolves the original Present-mode trap, where the control to exit was
+hidden and the keyboard shortcut was undiscoverable.
 
-The page leads with a direct working definition:
+### 6. Cue deck and live drift
 
-> Wealth and status LARPing is the deliberate construction of an online persona
-> that implies financial success, ownership, expertise, or elite access that
-> the available evidence does not support.
+The cue deck adds performance timing rather than more configuration:
 
-The supporting copy makes an important distinction the initial brief did not
-state clearly enough: a luxury image is not itself proof of deception. A
-testable claim and evidence mismatch are required.
+- project payout;
+- new store order;
+- market goal;
+- live viewer milestone.
 
-Improvement over the brief:
+Each cue updates the rehearsal card, scrolls to the device, appears inside the
+marked preview, and clears automatically.
 
-- avoids treating all aspirational aesthetics as fraudulent;
-- distinguishes access from ownership;
-- distinguishes an impression (“this person seems rich”) from a factual claim
-  (“this person says they own this car”); and
-- avoids presenting a slang label as a verified fact about a person.
+Live drift moves the main value gently every 1.1 seconds. The user can pause it
+at any time. It does not update unrelated data or contact a market-data source.
 
-### 2. Tactic coverage: good, with gaps
+### 7. Creator onboarding and FAQ
 
-Current coverage:
+The four-step workflow teaches:
 
-| Supplied tactic | Product coverage |
-| --- | --- |
-| Short-term rental shown as an asset | “Access framed as ownership” signal and staged-access demo. |
-| Fake private-jet studio | Primary fictional case with matching studio evidence. |
-| Fake/cropped financial proof | Trading screenshot case and unverifiable-proof signal. |
-| Guru/course funnel | Lifestyle-as-sales-funnel signal and incentive step. |
-| Batch-content/location clues | Consistency signal references repeated outfits, recycled locations, and timelines. |
-| Photoshop/interface clues | Artifact-inspection workflow references edits and interface inconsistencies. |
-| Shopping bags, boxes, and luxury props | Implicitly covered by the access signal, but not shown as a dedicated example. |
-| “Quiet luxury” or “old money” aesthetics | Deliberately not treated as evidence by itself; this nuance should be made more explicit in future content. |
-| Networking access motive | Not yet covered in enough depth. |
+1. pick a world;
+2. customize the scene;
+3. rehearse cues; and
+4. enter focus mode and record.
 
-### 3. Motive coverage: partial
+The FAQ answers the highest-trust questions directly: financial connections,
+local saving, focus mode, and prohibited use.
 
-The redesign clearly covers:
+## Visual design assessment
 
-- course and signal sales;
-- affiliate/commercial conversion;
-- investment solicitation;
-- attention and status as possible incentives; and
-- the principle that higher financial stakes require stronger evidence.
+### Strengths
 
-It does not yet give social validation and networking access the same depth as
-monetization. A future motive module should show that a deceptive status claim
-can seek invitations, partnerships, dating access, press attention, or insider
-credibility even when no direct sale occurs.
+- distinctive warm-paper, dark-green, coral, and lime palette;
+- editorial serif headlines with legible system sans-serif body text;
+- recognizable but invented screen worlds;
+- restrained borders and shadows;
+- a clear visual boundary between website chrome and the device prop;
+- responsive hierarchy rather than a desktop layout merely scaled down; and
+- no reliance on stock imagery or third-party assets.
 
-### 4. Detection and verification: strong educational foundation
+### Improvements over the baseline
 
-The four-step playbook is the core product improvement:
+- unified Larpmaxxing identity replaces two unrelated dashboard brands;
+- preview cards make variety visible;
+- primary controls are grouped beside the resulting screen;
+- action feedback uses non-blocking live-region toasts;
+- focus mode is purpose-built for filming; and
+- the permanent in-scene disclosure is visually integrated.
 
-1. **Isolate the claim.** Quote the smallest testable claim.
-2. **Inspect the artifact.** Preserve the caption, date, disclosures, edits, and
-   visible context.
-3. **Cross-check the story.** Seek primary and independent sources; reposts do
-   not count as corroboration.
-4. **Assess the incentive.** Identify what trust or conversion the performance
-   is intended to produce.
+### Remaining visual opportunities
 
-This is more reliable than a “spot the Photoshop mistake” approach because it
-can also handle genuine imagery attached to a misleading claim.
+1. Add optional device frames for phone, tablet, and desktop.
+2. Add creator-selectable accent themes while keeping contrast compliant.
+3. Add a compact horizontal picker on narrow phones to reduce page length.
+4. Add subtle entrance motion only when reduced motion is not requested.
+5. Add print and presentation styles for production planning.
 
-Remaining limitations:
-
-- the URL field does not fetch content;
-- no evidence files or citations can be attached;
-- no provenance or time-of-capture record exists;
-- no reverse-image, EXIF, record, or credential lookup is integrated;
-- no contrary-evidence field exists;
-- no exportable report exists; and
-- demo scores are authored examples rather than calculated outputs.
-
-### 5. Language: strong
-
-The glossary defines:
-
-- LARPer;
-- to LARP;
-- LARPy; and
-- clout chasing.
-
-It also recommends describing the inconsistency before labeling the creator.
-The clout-chasing comparison is useful because attention-seeking and deception
-overlap but are not synonymous.
-
-An additional production glossary should distinguish:
-
-- parody and disclosed role-play;
-- aspirational or editorial imagery;
-- puffery;
-- material misrepresentation;
-- impersonation;
-- undisclosed advertising; and
-- investment or financial-advice claims.
-
-### 6. Harm controls: good for a prototype
-
-Implemented safeguards:
-
-- all examples are explicitly fictional;
-- the score is called “evidence risk,” not truth or fraud probability;
-- the interface states that scores prioritize review rather than determine
-  guilt;
-- pasted URLs are not fetched or scraped;
-- saved state remains local to the browser;
-- a prominent section says “Suspicion is not proof”;
-- the ethics copy prohibits harassment, doxxing, protected-trait inference, and
-  taste-based character judgment; and
-- the workflow asks for contrary evidence.
-
-Production requirements:
-
-- moderation and abuse-reporting paths;
-- retention and deletion controls;
-- personally identifiable information handling rules;
-- claim-evidence audit trails;
-- rate limits and anti-targeting controls;
-- minimum evidence thresholds before sharing a report;
-- human review for high-impact claims;
-- legal review for defamation, privacy, consumer-protection, and financial
-  promotion risks; and
-- a correction and appeal workflow.
-
-## UX review
-
-### Information architecture
-
-The page now follows a coherent learning journey:
-
-1. create a disclosed fictional screen;
-2. understand the term and its potential misuse;
-3. recognize signal families;
-4. practice on fictional cases;
-5. learn a repeatable verification method;
-6. absorb the ethical boundary; and
-7. use precise language.
-
-The sticky navigation provides direct access to each core task. Mobile
-navigation becomes a full-screen menu, and all in-page destinations remain
-available without JavaScript.
-
-### Interaction design
+## Accessibility assessment
 
 Implemented:
 
-- a four-template prop gallery and live device preview;
-- bounded display-name, value, and scene-mood customization;
-- a permanent disclosure that cannot be disabled in the interface;
-- copyable production notes with the intended-use boundary;
-- selectable demo cases with immediate result updates;
-- URL validation with an honest no-fetch message;
-- locally saved case state;
-- a copyable review checklist;
-- tab-like workflow steps with arrow, Home, and End keyboard navigation;
-- status announcements through an ARIA live toast; and
-- responsive controls with at least 44-pixel targets.
-
-The URL input is intentionally a guided-review entry point, not a fake analyzer.
-This avoids claiming that a browser-only prototype can inspect external content.
-
-### Visual design
-
-The new direction uses:
-
-- editorial serif headlines paired with a system sans serif;
-- warm paper, dark green, coral, and acid-lime colors;
-- a restrained card system;
-- visible borders and offsets rather than excessive shadows;
-- custom CSS illustration to explain staged luxury visually;
-- asymmetrical but readable layouts; and
-- a dark, task-focused case-lab section.
-
-The outer experience avoids mimicking a bank or brokerage and gives the product
-a distinct editorial identity. The device preview uses invented financial UI
-patterns only inside a visibly bounded, permanently marked prop context.
-
-### Responsive behavior
-
-Layouts are explicitly adapted at 900px and 620px:
-
-- the hero, analyzer, workflow, and ethics layouts stack;
-- signal cards reduce from mixed 5/7-column spans to two columns and then one;
-- the menu becomes touch-friendly;
-- forms stack;
-- case output controls wrap; and
-- the glossary moves from a three-part row to a one-column reading flow.
-
-## Accessibility review
-
-### Improvements implemented
-
-- semantic header, nav, main, section, article, footer, and form landmarks;
-- unique page title and meta description;
+- semantic page landmarks;
 - skip link;
-- visible focus indication;
-- reduced-motion handling;
-- no color-only signal labels;
-- text alternatives for meaningful illustration and scores;
-- explicit button types and labels;
-- native URL validation;
-- `aria-live` status feedback;
-- tab semantics and expected keyboard navigation for the playbook;
-- pressed state for selectable cases;
-- mobile controls sized for touch; and
-- logical source order that matches the visual reading order.
+- visible focus states;
+- labelled native controls;
+- 44-pixel-or-larger primary targets;
+- reduced-motion support;
+- ARIA tab state and keyboard navigation;
+- ARIA pressed state for live drift;
+- status announcements for save, reset, cues, and clipboard actions;
+- Escape behavior for the mobile menu and focus mode; and
+- layouts for desktop, tablet, and mobile.
 
-### Items requiring formal testing
+Still requiring formal validation:
 
-The following cannot be certified by static review alone:
+- NVDA, JAWS, VoiceOver, and TalkBack behavior;
+- Windows forced-colors mode;
+- 200% and 400% zoom;
+- text-spacing overrides;
+- computed color contrast in all six screen themes; and
+- focus visibility against every preview background.
 
-- color contrast under computed browser rendering;
-- zoom and text-spacing behavior through 400%;
-- VoiceOver, NVDA, JAWS, and TalkBack announcements;
-- high-contrast and forced-colors behavior;
-- focus behavior when the mobile menu opens and closes;
-- exact target-size conformance at every breakpoint; and
-- browser/OS combinations.
+Recommended accessibility improvements:
 
-### Known accessibility improvements still needed
+1. Add `aria-labelledby` updates between each template tab and the shared panel.
+2. Announce live drift value changes at a low frequency or provide an optional
+   text status without creating excessive screen-reader output.
+3. Move focus to the cue notification only when the user opts into that behavior.
+4. Add automated accessibility checks in CI.
 
-1. Trap focus inside the open mobile menu or present it as a non-modal disclosure
-   that does not cover the viewport.
-2. Close the menu on Escape and restore focus to the trigger.
-3. Add `aria-controls` relationships from every case button to the output.
-4. Provide a non-circular text equivalent for the risk dial adjacent to the
-   score.
-5. Test CSS-generated illustration contrast in Windows forced-colors mode.
-6. Add an inline error message associated with the URL field rather than relying
-   only on browser validation and a toast.
+## Privacy and security
 
-## Privacy, security, and trust
+Current data exposure is low:
 
-Current privacy exposure is low:
+- no account;
+- no backend;
+- no analytics;
+- no trackers;
+- no bank, broker, wallet, or store integration;
+- no URL submission;
+- no user-content upload; and
+- only a small fictional setup object in local browser storage.
 
-- no network requests are made by application JavaScript;
-- no analytics or trackers are present;
-- no account or identity is required;
-- only fictional case identifiers are stored; and
-- pasted URLs are not persisted.
+Technical considerations:
 
-Current technical risks:
+- user-provided display names are escaped before insertion;
+- values are numerically bounded;
+- generated screen HTML still uses `innerHTML`, so future user-generated fields
+  must follow the same escaping rule or use DOM text nodes;
+- `localStorage` is suitable for fictional setup values, not sensitive content;
+- a production deployment should add a strict Content Security Policy; and
+- automated regression tests should cover save/restore, cue cleanup, drift
+  start/stop, and focus exit.
 
-- dynamically rendered demo content uses `innerHTML`. Values are hard-coded, so
-  it is not currently exploitable, but future user-controlled content must use
-  DOM text nodes or sanitization;
-- `localStorage` is origin-readable and should never hold sensitive evidence;
-- there is no Content Security Policy;
-- there is no integrity or deployment configuration; and
-- there are no automated tests.
+## Performance and maintainability
 
-If URL retrieval is added, the architecture must guard against server-side
-request forgery, malicious redirects, tracking pixels, oversized media,
-credential leakage, illegal content retention, and platform terms-of-service
-violations.
+The single-file architecture remains fast and simple:
 
-## Technical quality
-
-Strengths:
-
-- no third-party dependencies;
-- fast static delivery;
+- no dependencies;
 - no build step;
-- progressive navigation;
-- deterministic demo data;
-- CSS and JavaScript contained in one deployable file; and
-- no collection or transmission of user data.
+- no runtime network requests;
+- immediate static hosting; and
+- minimal operational risk.
 
-Trade-offs:
+The file is now large enough that the next material feature should trigger
+modularization:
 
-- one large HTML file is easy to deploy but difficult to test and maintain;
-- content and application behavior are tightly coupled;
-- no component, design-token package, routing, content model, or localization
-  boundary exists;
-- no linting, formatting, test, or CI configuration exists; and
-- there is no production error telemetry.
+```text
+index.html
+styles/
+  tokens.css
+  marketing.css
+  studio.css
+src/
+  templates.js
+  studio.js
+  cues.js
+  persistence.js
+tests/
+  studio.test.js
+  accessibility.test.js
+```
 
-For the next implementation phase, split the project into semantic components
-and store educational content in structured data. Do not add a framework solely
-for visual polish; add one only when routing, evidence workflows, localization,
-or team maintenance justify it.
+A framework is not required yet. Modular JavaScript and CSS would provide most
+of the maintenance benefit without adding a heavy build chain.
 
 ## Prioritized roadmap
 
-### Priority 0 — trust and correctness
+### Priority 0: validate the current simulator
 
-1. Publish score methodology or remove numeric scores in favor of “low,”
-   “review,” and “high-priority review.”
-2. Add citations for definitions, misinformation research, advertising rules,
-   and financial-promotion guidance.
-3. Build an explicit claim/evidence/contrary-evidence data model.
-4. Add correction, appeal, deletion, and abuse-reporting policies before any
-   public case publishing.
-5. Complete legal and safety review before processing identifiable people.
+1. Browser-test all six templates.
+2. Verify cue timing, drift pause, reset, save/restore, and Escape exits.
+3. Run keyboard and screen-reader checks.
+4. Test the prop label under focus mode and common recording crops.
 
-### Priority 1 — useful product depth
+### Priority 1: creator value
 
-1. Add evidence capture with source URL, timestamp, archived context, notes, and
-   confidence.
-2. Create more fictional cases for shopping-bag staging, “old money” aesthetics,
-   credential claims, charity/status claims, and networking access.
-3. Add a side-by-side claim matrix: claimed, observed, corroborated, unresolved.
-4. Produce an accessible, citation-rich report export.
-5. Add onboarding that teaches why a clue is not proof.
+1. Add phone, tablet, and desktop frame options.
+2. Add named local presets for recurring characters.
+3. Add fictional transaction/comment editors with sensible limits.
+4. Add a scene timer and countdown cue.
+5. Add a privacy-preserving screenshot export that always includes disclosure.
 
-### Priority 2 — UX and accessibility hardening
+### Priority 2: production polish
 
-1. Complete assistive-technology, keyboard, zoom, forced-colors, and contrast
-   testing.
-2. Add focus management and inline form errors.
-3. Add a low-bandwidth mode if external media is introduced.
-4. Localize the glossary and examples; slang meaning varies across communities.
-5. Add print styles for the playbook and report.
+1. Add theme accents and accessibility-safe palettes.
+2. Add a cue sequence for multi-beat scenes.
+3. Add optional sound cues with explicit mute controls.
+4. Add offline installability through a small web-app manifest and service
+   worker.
 
-### Priority 3 — engineering maturity
+### Priority 3: engineering maturity
 
-1. Split content, styles, and behavior into maintainable modules.
-2. Add unit tests for state and scoring, accessibility checks, and responsive
-   browser tests.
-3. Add a strict Content Security Policy and deployment headers.
-4. Introduce schema validation for persisted or imported records.
-5. Add privacy-preserving telemetry only after defining a measurement plan.
+1. Split the single file into modules.
+2. Add unit, browser, and accessibility tests.
+3. Add deployment headers and Content Security Policy.
+4. Add schema versioning for locally saved scenes.
 
-## Product success measures
+## Success measures
 
-Avoid measuring success by accusations generated or “LARPers caught.” Better
-measures are:
+Useful product measures are:
 
-- percentage of reviews that quote a specific claim;
-- percentage that record independent and contrary evidence;
-- reduction in unsupported labels after using the playbook;
-- completion and comprehension rates for fictional cases;
-- accessibility task completion across assistive technologies;
-- correction rate and time to correction; and
-- user understanding that a risk score is not a verdict.
+- time from landing to first customized scene;
+- percentage of users who successfully switch templates;
+- cue and focus-mode completion rate;
+- save/restore success rate;
+- mobile task completion;
+- accessibility task completion; and
+- percentage of recorded/exported output retaining the prop disclosure.
+
+Avoid measuring success through the realism of deception. Measure how quickly a
+creator can tell a clearly fictional story.
 
 ## Final verdict
 
-The baseline product failed the supplied wealth/status LARPing standard and
-created a concrete misuse risk by facilitating unmarked financial screenshots.
+Larpmaxxing now has a coherent creator mission and a stronger experience than
+the original two-screen dashboard. It combines the reference product’s
+low-friction dashboard selection with broader scene variety, live performance
+controls, local continuity, accessible navigation, and visible fictional
+context.
 
-The redesign is now a hybrid: it retains the creator value demonstrated by the
-Larped reference, but makes fiction visible at the point of use and pairs
-creation with literacy. It strongly fulfills the definition, detection,
-language, and harm-control criteria as an educational prototype. It partially
-fulfills tactic and motive coverage and intentionally stops short of claiming
-real automated analysis. The most important next steps are to validate the
-permanent disclosure under real recording conditions and build a transparent
-evidence model with citations, contrary evidence, human review, and correction
-rights.
+The strongest next improvement is not more marketing copy. It is production
+validation of the six screens, live cue timing, focus mode, save/restore, and
+mobile filming ergonomics.

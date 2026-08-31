@@ -1,21 +1,20 @@
 # Larpmaxxing
 
-A dependency-free, single-page responsible prop studio and media-literacy
-experience for wealth and status content.
+A dependency-free, single-page fictional money simulator for skits, shorts,
+roleplay, moodboards, and rehearsals.
 
 ## What it includes
 
-- Four customizable, clearly marked fictional screens: bank, crypto, brokerage,
-  and storefront.
+- Six customizable fictional screens: bank, crypto, brokerage, storefront,
+  payment, and livestream.
 - A permanent on-screen prop disclosure and production-safety checklist.
-- A clear working definition focused on unsupported claims of ownership,
-  expertise, financial success, and elite access.
-- Four evidence-signal families: access, money, urgency, and consistency.
-- An interactive case lab with three fictional cases and a URL-guided review.
-- A keyboard-accessible verification playbook.
-- Language and ethics guidance that keeps analysis focused on claims, not people.
-- Responsive layouts, reduced-motion support, visible focus states, and local-only
-  case-note persistence.
+- Live display name, value, and scene-mood controls.
+- User-triggered payout, store, market, and livestream cues.
+- Optional live number drift for active-looking scenes.
+- Focus mode with a visible exit and permanent fictional disclosure.
+- Local setup saving and reset.
+- Keyboard-accessible template and creator-workflow tabs.
+- Responsive layouts, reduced-motion support, and visible focus states.
 
 ## Run locally
 
@@ -29,10 +28,10 @@ Then open `http://localhost:4173`.
 
 ## Privacy and scope
 
-The prop studio never connects to a bank, broker, exchange, or storefront, and
-must not be used as evidence of payment, funds, returns, or expertise. The case
-lab does not fetch pasted URLs, scrape social platforms, identify people, or
-issue factual verdicts. Saved demo cases remain in browser `localStorage`.
+The simulator never connects to a bank, broker, exchange, storefront, payment
+service, or social platform. It must not be used as evidence of payment, funds,
+returns, identity, or expertise. Saved fictional setups remain in browser
+`localStorage`.
 
 See [`AUDIT_REPORT.md`](./AUDIT_REPORT.md) for the product, content, UX,
 accessibility, trust, and implementation assessment.
