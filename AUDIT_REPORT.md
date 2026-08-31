@@ -1,6 +1,6 @@
 # Larpmaxxing product and standards audit
 
-Audit date: 31 August 2026  
+Audit date: 31 August 2026
 Scope: product purpose, wealth/status LARPing taxonomy, information quality,
 user experience, accessibility, privacy, safety, and technical implementation.
 
