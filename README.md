@@ -1,38 +1,34 @@
-# Prop Dashboard
+# Larpmaxxing
 
-A single self-contained `index.html` for making mock financial UI screenshots.
-No build step, no dependencies — open the file in a browser.
+A dependency-free, single-page media-literacy experience for understanding and
+investigating wealth and status LARPing on social media.
 
-## Two dashboards (tab-switched)
+## What it includes
 
-- **Halcyon** — light retail bank: editable greeting, account cards with masked
-  numbers, auto-summed total balance, and a transaction list (credits green `+`,
-  debits `−`).
-- **Cinder** — dark crypto portfolio: portfolio value with 24h change, a seeded
-  SVG area chart, a holdings table with computed values and allocation bars, cash
-  balance, and recent activity.
+- A clear working definition focused on unsupported claims of ownership,
+  expertise, financial success, and elite access.
+- Four evidence-signal families: access, money, urgency, and consistency.
+- An interactive case lab with three fictional cases and a URL-guided review.
+- A keyboard-accessible verification playbook.
+- Language and ethics guidance that keeps analysis focused on claims, not people.
+- Responsive layouts, reduced-motion support, visible focus states, and local-only
+  case-note persistence.
 
-## Behavior
+## Run locally
 
-- Every number and label is inline-editable (`contenteditable` spans bound to a
-  state object by `data-path`). Commit on blur/Enter, cancel on Escape.
-- Derived figures (portfolio value, 24h change, per-holding value, allocation %)
-  recalculate automatically and can't be edited directly.
-- Add / delete rows for transactions and holdings.
-- Chart is a seeded pseudo-random walk — stable across reloads, and the end of
-  the line trends with the 24h change.
+No build step or dependencies are required:
 
-## Persistence
+```bash
+python3 -m http.server 4173
+```
 
-- Saves to `localStorage` on every commit, loads on boot.
-- **Reset** restores defaults (behind a confirm).
-- **Export** / **Import** move a setup between machines as a JSON file.
+Then open `http://localhost:4173`.
 
-## Present mode
+## Privacy and scope
 
-Top-bar toggle, also **Cmd/Ctrl+E**. Hides all editing chrome and the top bar,
-and sets `contenteditable` to false — a clean full-bleed screenshot.
+The case lab is an educational prototype. It does not fetch pasted URLs, scrape
+social platforms, identify people, or issue factual verdicts. Saved demo cases
+remain in browser `localStorage`.
 
-## Note
-
-All brand names are invented. No real company names, logos, or trademarks.
+See [`AUDIT_REPORT.md`](./AUDIT_REPORT.md) for the product, content, UX,
+accessibility, trust, and implementation assessment.
